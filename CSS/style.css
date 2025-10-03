@@ -84,6 +84,53 @@
   box-shadow: 0 4px 16px rgba(0, 26, 225, 0.18);
 }
 
+/* Contact buttons reuse anime-watch-btn base styles but with brand colors */
+.anime-watch-btn.email {
+  border-color: #7a7a7a;
+  background: #282D3F;
+}
+.anime-watch-btn.email:hover, .anime-watch-btn.email:focus {
+  background: #7a7a7a;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(122,122,122,0.18);
+}
+.anime-watch-btn.facebook {
+  border-color: #1877f2;
+  background: #282D3F;
+}
+.anime-watch-btn.facebook:hover, .anime-watch-btn.facebook:focus {
+  background: #1877f2;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(24,119,242,0.18);
+}
+.anime-watch-btn.instagram {
+  border-color: #e1306c;
+  background: #282D3F;
+}
+.anime-watch-btn.instagram:hover, .anime-watch-btn.instagram:focus {
+  background: #e1306c;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(225,49,108,0.18);
+}
+.anime-watch-btn.discord {
+  border-color: #5865f2;
+  background: #282D3F;
+}
+.anime-watch-btn.discord:hover, .anime-watch-btn.discord:focus {
+  background: #5865f2;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(88,101,242,0.18);
+}
+.anime-watch-btn.github {
+  border-color: #6cc644;
+  background: #282D3F;
+}
+.anime-watch-btn.github:hover, .anime-watch-btn.github:focus {
+  background: #6cc644;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(108,198,68,0.18);
+}
+
 
 /* Arc0 page: horizontal image row, 16:9, border-radius */
 .arcphotosceane-img-row {
