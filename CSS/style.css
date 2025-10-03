@@ -1,0 +1,1021 @@
+/* Anime watch button row */
+.anime-watch-btn-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 32px auto 0 auto;
+  padding: 0 16px;
+  max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.anime-watch-btn {
+  color: #fff;
+  background: #2d3f2d;
+  padding: 0px 16px;
+  font-size: 13px;
+  line-height: 26px;
+  border: 2px solid olivedrab;
+  border-radius: 5px;
+  text-shadow: none;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-family: Prompt, sans-serif;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(44,64,44,0.08);
+  cursor: pointer;
+  display: inline-block;
+}
+.anime-watch-btn.iqiyi {
+  border-color: olivedrab;
+}
+.anime-watch-btn.iqiyi:hover, .anime-watch-btn:focus {
+  background: olivedrab;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(44,64,44,0.18);
+}
+.anime-watch-btn.netflix {
+  border-color: #e50914;
+  background: #282D3F;
+}
+.anime-watch-btn.netflix:hover, .anime-watch-btn.netflix:focus {
+  background: #e50914;
+    color: #fff;
+  box-shadow: 0 4px 16px rgba(64, 44, 44, 0.18);
+}
+.anime-watch-btn.bilibili {
+  border-color: #00aaff;
+  background: #282D3F;
+}
+.anime-watch-btn.bilibili:hover, .anime-watch-btn.bilibili:focus {
+  background: #00aaff;
+    color: #fff;
+  box-shadow: 0 4px 16px rgba(44, 55, 64, 0.18);
+}
+.anime-watch-btn.primevideo {
+  border-color:#00A8E1;
+  background: #282D3F;
+}
+.anime-watch-btn.primevideo:hover, .anime-watch-btn.primevideo:focus{
+  background: #00A8E1;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(44, 55, 64, 0.18);
+}
+.anime-watch-btn.youtube {
+  border-color:#FF0000;
+  background: #282D3F;
+}
+.anime-watch-btn.youtube:hover, .anime-watch-btn.primevideo:focus{
+  background: #FF0000;
+  color: #fff;
+  border-color: #FF0000;
+  box-shadow: 0 4px 16px rgba(225, 0, 0, 0.18);
+}
+.anime-watch-btn.myanimelist {
+  border-color:#003cff;
+  background: #282D3F;
+}
+.anime-watch-btn.myanimelist:hover, .anime-watch-btn.primevideo:focus{
+  background: #003cff;
+  color: #fff;
+  border-color: #003cff;
+  box-shadow: 0 4px 16px rgba(0, 26, 225, 0.18);
+}
+
+
+/* Arc0 page: horizontal image row, 16:9, border-radius */
+.arcphotosceane-img-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+  margin: 32px auto 32px auto;
+  padding: 0 12px;
+}
+.arcphotosceane-img-row img {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 16/9;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  transition: transform 0.3s cubic-bezier(0.77,0,0.175,1), box-shadow 0.3s;
+}
+.arcphotosceane-img-row img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px rgba(199,56,60,0.18);
+}
+@media (max-width: 900px) {
+  .arcphotosceane-img-row {
+    gap: 12px;
+    max-width: 98vw;
+    padding: 0 4px;
+  }
+  .arcphotosceane-img-row img {
+    max-width: 32vw;
+    border-radius: 12px;
+  }
+}
+/* Arc page: Show only selected content section */
+.arc-content-section {
+  display: none;
+}
+#arc-carousel-1:checked ~ .arc-carousel ~ .arc-content-1,
+#arc-carousel-2:checked ~ .arc-carousel ~ .arc-content-2,
+#arc-carousel-3:checked ~ .arc-carousel ~ .arc-content-3,
+#arc-carousel-4:checked ~ .arc-carousel ~ .arc-content-4,
+#arc-carousel-5:checked ~ .arc-carousel ~ .arc-content-5 {
+  display: block;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+    background-color: #0f1118;
+    font-family: Prompt, sans-serif;
+}
+
+/* Layered background for .container */
+.container {
+  position: relative;
+  z-index: 0;
+  background: transparent;
+}
+
+
+/* Layered background for .container with fade animation and DRY variable-based image */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: #0f1118;
+  background-image: linear-gradient(rgba(15,17,24,0.82), rgba(15,17,24,0.82)), var(--bg-url, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 2s cubic-bezier(0.77,0,0.175,1);
+}
+
+.container:has(#carousel-1:checked)::before,
+.container:has(#carousel-2:checked)::before,
+.container:has(#carousel-3:checked)::before,
+.container:has(#carousel-4:checked)::before,
+.container:has(#carousel-5:checked)::before {
+  opacity: 1;
+}
+.container:has(#carousel-1:checked)::before { --bg-url: url('https://images6.alphacoders.com/120/1200429.jpg'); }
+.container:has(#carousel-2:checked)::before { --bg-url: url('https://images5.alphacoders.com/126/1262882.jpg'); }
+.container:has(#carousel-3:checked)::before { --bg-url: url('https://wallpapercave.com/wp/wp12526882.jpg'); }
+.container:has(#carousel-4:checked)::before { --bg-url: url('https://external-preview.redd.it/jujutsu-kaisen-season-2-new-key-visual-revealed-for-shibuya-v0-uZxKhx5yBcH9sLn2Ng50x5Rlwvj0pR2edqD4nXv3nqg.jpg?auto=webp&s=19b8c5ddeb474a4a0d84729e921c4867a4101074'); }
+.container:has(#carousel-5:checked)::before { --bg-url: url('https://cdn.oneesports.gg/cdn-data/2023/12/Anime_JujutsuKaisen_Season2_ClosingTheGate_Finale_Yuji.jpg'); }
+
+.carousel-controls input#carousel-1:checked ~ .carousel ~ .container,
+.carousel-controls input#carousel-2:checked ~ .carousel ~ .container,
+.carousel-controls input#carousel-3:checked ~ .carousel ~ .container,
+.carousel-controls input#carousel-4:checked ~ .carousel ~ .container,
+.carousel-controls input#carousel-5:checked ~ .carousel ~ .container {
+  background-color: #000000;
+}
+nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #282D3F;
+      border-bottom: 1px solid #282D3F;
+      margin-top: auto;
+}
+
+nav .logo img {
+  height: 40px;  
+  width: auto;
+  display: block;
+  transition: opacity 0.3s cubic-bezier(0.77,0,0.175,1);
+}
+
+nav .logo img:hover {
+  opacity: 0.5;
+}
+
+nav ul {
+  display: none;
+}
+/* Custom menu icon and dropdown styles */
+.menu-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  outline: none;
+}
+.menu-img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.5s cubic-bezier(0.77,0,0.175,1), opacity 0.3s;
+  opacity: 1;
+}
+.menu-icon:hover .menu-img,
+.menu-icon:focus .menu-img {
+  opacity: 0.7;
+  transform: rotate(90deg);
+}
+.menu-toggle:checked + .menu-icon .menu-img {
+  opacity: 0.7;
+  transform: rotate(90deg);
+}
+.menu-toggle:not(:checked) + .menu-icon .menu-img {
+  opacity: 1;
+  transform: rotate(-90deg);
+}
+.menu-toggle:checked + .menu-icon {
+  background: #282D3F;
+}
+.menu-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 64px; /* move dropdown lower to avoid nav overlap */
+  right: 0;
+  min-width: 160px;
+  background: rgba(40,45,63,0.85); /* less prominent, semi-transparent */
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.4s cubic-bezier(0.77,0,0.175,1), transform 0.4s cubic-bezier(0.77,0,0.175,1);
+  z-index: 100;
+}
+.menu-toggle:checked ~ .dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.menu-toggle:not(:checked) ~ .dropdown-menu {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+.dropdown-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 24px;
+  font-size: 1rem;
+  border-bottom: 1px solid #393c4c;
+  transition: background 0.2s, color 0.2s;
+}
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+.dropdown-menu a:hover {
+  background: #C7383C;
+  color: #fff;
+}
+
+nav ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 1rem;
+      transition: color 0.2s ease-in-out;
+}
+
+nav ul li a:hover {
+      color: #C7383C;
+}
+.Welcome{
+    font-family: Prompt, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+    background: -webkit-linear-gradient(#ffffff, #ff2c2c, rgb(89, 0, 3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+/* ปรับ margin ให้ข้อความไม่โดน carousel ทับ */
+.JujutsuInto{
+  font-family: Prompt, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  margin: 0 auto 40px auto;
+  max-width: 900px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Carousel Pure CSS */
+.carousel-wrapper {
+  width: 800px;
+  margin: 0 auto 60px auto;
+  position: relative;
+  z-index: 1;
+}
+.carousel-controls {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+/* Arc page carousel styles (independent from index carousel) */
+.arc-carousel-wrapper {
+  width: 800px;
+  margin: 0 auto 60px auto;
+  position: relative;
+  z-index: 1;
+}
+.arc-carousel-controls {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+.arc-carousel {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+.arc-carousel .carousel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.77,0,0.175,1), opacity 0.7s cubic-bezier(0.77,0,0.175,1);
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arc-carousel .carousel-item img {
+  height: 340px;
+  max-width: 90vw;
+  width: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  object-fit: cover;
+}
+@media (max-width: 900px) {
+  .arc-carousel .carousel-item img {
+    height: 220px;
+    max-width: 98vw;
+  }
+}
+@media (max-width: 600px) {
+  .arc-carousel .carousel-item img {
+    height: 140px;
+    max-width: 98vw;
+  }
+}
+
+.arc-carousel-controls input[type="radio"] {
+  display: none;
+}
+#arc-carousel-1:checked ~ .arc-carousel .arc-item-1 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#arc-carousel-1:checked ~ .arc-carousel .arc-item-2 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-1:checked ~ .arc-carousel .arc-item-3 {
+  opacity: 0.4;
+  transform: translate(150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-1:checked ~ .arc-carousel .arc-item-4 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-1:checked ~ .arc-carousel .arc-item-5 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-2:checked ~ .arc-carousel .arc-item-1 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-2:checked ~ .arc-carousel .arc-item-2 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#arc-carousel-2:checked ~ .arc-carousel .arc-item-3 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-2:checked ~ .arc-carousel .arc-item-4 {
+  opacity: 0.4;
+  transform: translate(150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-2:checked ~ .arc-carousel .arc-item-5 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-3:checked ~ .arc-carousel .arc-item-1 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-3:checked ~ .arc-carousel .arc-item-2 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-3:checked ~ .arc-carousel .arc-item-3 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#arc-carousel-3:checked ~ .arc-carousel .arc-item-4 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-3:checked ~ .arc-carousel .arc-item-5 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-4:checked ~ .arc-carousel .arc-item-1 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-4:checked ~ .arc-carousel .arc-item-2 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-4:checked ~ .arc-carousel .arc-item-3 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-4:checked ~ .arc-carousel .arc-item-4 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#arc-carousel-4:checked ~ .arc-carousel .arc-item-5 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-5:checked ~ .arc-carousel .arc-item-1 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-5:checked ~ .arc-carousel .arc-item-2 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-5:checked ~ .arc-carousel .arc-item-3 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-5:checked ~ .arc-carousel .arc-item-4 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#arc-carousel-5:checked ~ .arc-carousel .arc-item-5 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+.arc-carousel-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 3;
+}
+.arc-carousel-nav label {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+  border: 2px solid #430002;
+  transition: opacity 0.2s, background 0.2s;
+}
+#arc-carousel-1:checked ~ .arc-carousel-nav .arc-nav-1,
+#arc-carousel-2:checked ~ .arc-carousel-nav .arc-nav-2,
+#arc-carousel-3:checked ~ .arc-carousel-nav .arc-nav-3,
+#arc-carousel-4:checked ~ .arc-carousel-nav .arc-nav-4,
+#arc-carousel-5:checked ~ .arc-carousel-nav .arc-nav-5 {
+  opacity: 1;
+  background: #C7383C;
+}
+@media (max-width: 700px) {
+  .arc-carousel-wrapper {
+    width: 98vw;
+    min-width: 0;
+  }
+  .arc-carousel-controls, .arc-carousel {
+    height: 220px;
+  }
+  .arc-carousel .carousel-item {
+    height: 180px;
+  }
+  .arc-carousel .carousel-item img {
+    height: 180px;
+  }
+}
+.carousel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.77,0,0.175,1), opacity 0.7s cubic-bezier(0.77,0,0.175,1);
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-item img {
+  height: 500px;
+  width: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+/* Hide radio buttons */
+.carousel-controls input[type="radio"] {
+  display: none;
+}
+/* Show item-1 when carousel-1 checked */
+#carousel-1:checked ~ .carousel .item-1 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#carousel-1:checked ~ .carousel .item-2 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-1:checked ~ .carousel .item-3 {
+  opacity: 0.4;
+  transform: translate(150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-1:checked ~ .carousel .item-4 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-1:checked ~ .carousel .item-5 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+/* Show item-2 when carousel-2 checked */
+#carousel-2:checked ~ .carousel .item-1 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-2:checked ~ .carousel .item-2 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#carousel-2:checked ~ .carousel .item-3 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-2:checked ~ .carousel .item-4 {
+  opacity: 0.4;
+  transform: translate(150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-2:checked ~ .carousel .item-5 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+/* Show item-3 when carousel-3 checked */
+#carousel-3:checked ~ .carousel .item-1 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-3:checked ~ .carousel .item-2 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-3:checked ~ .carousel .item-3 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#carousel-3:checked ~ .carousel .item-4 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-3:checked ~ .carousel .item-5 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+/* Show item-4 when carousel-4 checked */
+#carousel-4:checked ~ .carousel .item-1 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-4:checked ~ .carousel .item-2 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-4:checked ~ .carousel .item-3 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-4:checked ~ .carousel .item-4 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+#carousel-4:checked ~ .carousel .item-5 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+/* Show item-5 when carousel-5 checked */
+#carousel-5:checked ~ .carousel .item-1 {
+  opacity: 0.4;
+  transform: translate(50%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-5:checked ~ .carousel .item-2 {
+  opacity: 0.4;
+  transform: translate(250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-5:checked ~ .carousel .item-3 {
+  opacity: 0.4;
+  transform: translate(-250%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-5:checked ~ .carousel .item-4 {
+  opacity: 0.4;
+  transform: translate(-150%, -50%) scale(0.8);
+  z-index: 1;
+}
+#carousel-5:checked ~ .carousel .item-5 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+.carousel-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 3;
+}
+.carousel-nav label {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+  border: 2px solid #C7383C;
+  transition: opacity 0.2s, background 0.2s;
+}
+.carousel-nav label:hover,
+.carousel-nav label:focus {
+  background: #C7383C;
+  opacity: 0.8;
+  border-color: #fff;
+  box-shadow: 0 0 0 4px rgba(199,56,60,0.25);
+}
+#carousel-1:checked ~ .carousel-nav .nav-1,
+#carousel-2:checked ~ .carousel-nav .nav-2,
+#carousel-3:checked ~ .carousel-nav .nav-3,
+#carousel-4:checked ~ .carousel-nav .nav-4,
+#carousel-5:checked ~ .carousel-nav .nav-5 {
+  opacity: 1;
+  background: #C7383C;
+}
+@media (max-width: 700px) {
+  .carousel-wrapper {
+    width: 98vw;
+    min-width: 0;
+  }
+  .carousel-controls, .carousel {
+    height: 220px;
+  }
+  .carousel-item {
+    height: 180px;
+  }
+  .carousel-item img {
+    height: 180px;
+  }
+}
+.footer-text {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.conimg1, .conimg2, .conimg3, .conimg4, .conimg5 {
+  height: 350px;
+  width: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.77,0,0.175,1), opacity 0.7s cubic-bezier(0.77,0,0.175,1);
+  margin: 0 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.arc-img-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  justify-items: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto 40px auto;
+  padding: 0 16px;
+}
+h2 {
+    font-family: Prompt, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+    background: -webkit-linear-gradient(#ffffff, #ff2c2c, rgb(89, 0, 3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+p {
+    font-family: Prompt, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    margin: 0 auto 20px auto;
+    max-width: 900px;
+}
+.logo-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 10px auto 0 auto;
+}
+.IQIYLogo, .NetflixLogo, .BilibiliLogo, .MALLogo {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+  margin: 0;
+}
+.preview-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin: 20px 0;
+}
+.preview-row img {
+  height: 150px;
+  width: 250px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+
+.arc-img-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  width: 100vw;
+  height: 80vh;
+  overflow: hidden;
+}
+.arc-img-link {
+  flex: 1 1 0;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  height: 100%;
+  transition: flex 0.3s cubic-bezier(0.77,0,0.175,1);
+}
+.arc-img-col {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  transition: transform 0.4s cubic-bezier(0.77,0,0.175,1), box-shadow 0.4s cubic-bezier(0.77,0,0.175,1);
+  cursor: pointer;
+  display: block;
+}
+.arc-img-overlay {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 18px 0 12px 0;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(0deg, rgba(40,45,63,0.85) 80%, rgba(40,45,63,0.0) 100%);
+  letter-spacing: 1px;
+  width: 100%;
+  border-radius: 0 0 18px 18px;
+  pointer-events: none;
+  z-index: 2;
+}
+.arc-img-link:hover .arc-img-col,
+.arc-img-link:focus .arc-img-col {
+  transform: scale(1.06);
+  box-shadow: 0 8px 32px rgba(199,56,60,0.35);
+  z-index: 2;
+}
+.arc-img-link:hover .arc-img-overlay,
+.arc-img-link:focus .arc-img-overlay {
+  color: #C7383C;
+  background: linear-gradient(0deg, rgba(40,45,63,0.95) 80%, rgba(40,45,63,0.0) 100%);
+}
+
+/* Flip Card Layout for Character Page */
+.character-card-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  margin: 40px 0 40px 0;
+}
+.card {
+  width: 250px;
+  height: 375px;
+  perspective: 1000px;
+  background: transparent;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  position: relative;
+}
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.77,0,0.175,1);
+  transform-style: preserve-3d;
+}
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  box-sizing: border-box;
+  padding: 18px 12px 12px 12px;
+}
+.card-front {
+  background: linear-gradient(135deg, #282D3F 60%, #C7383C 100%);
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+.card-back {
+  background: linear-gradient(135deg, #301011 60%, #000000 100%);
+  transform: rotateY(180deg);
+}
+.card-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  margin-bottom: 12px;
+}
+.card-img-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.card-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 8px;
+  background: -webkit-linear-gradient(#fff, #ff2c2c, rgb(89, 0, 3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.card-info h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  background: -webkit-linear-gradient(#fff, #ff2c2c, rgb(89, 0, 3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.card-info p {
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
